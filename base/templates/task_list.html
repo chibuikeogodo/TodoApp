@@ -1,0 +1,54 @@
+{%extends 'base.html' %}
+
+
+{%block body%}
+<div class="card-body">
+    <h3 class="card-title">My TODO list</h3>
+    <p class="card-text">
+<form class="form-inline" method="GET" >
+    <input class="form-control  mx-sm-3" type="text" name="search-text" value="{{search_input}}">
+    <input class="btn btn-info" type="submit" value="Search">
+</form>
+    <br/>
+    <div class="container" align="center">
+
+    <table class="table">
+      <tbody>
+        <tr>
+            <th>TASKS</th>
+            <th></th>
+            <th> Action</th>
+        </tr>
+
+        {%for task in tasks%}
+        {% if task.complete%}
+            <tr>
+                <td><a href="{%url 'task_details' task.id%}"><s>{{task.title}}</s></a> </td>
+                <td></td>
+                <td>Completed <a class="btn btn-danger btn-sm" href="{%url 'task_delete' task.id%}">Delete</a></td><a class="btn btn-success btn-sm" href="{%url 'task_update' task.id%}">update</a>
+            </tr>
+        {%else%}
+            <tr>
+                <td><a href="{%url 'task_details' task.id%}">{{task.title}}</a> </td>
+                <td></td>
+                <td><a class="btn btn-success btn-sm" href="{%url 'task_update' task.id%}">Update</a>  <a class="btn btn-danger btn-sm" href="{%url 'task_delete' task.id%}">Delete</a></td>
+            </tr>
+        {%endif%}
+        {% empty %}
+            <h3>No item in list</h3>
+        {%endfor%}
+        <tr>
+      </tbody>
+    </table>
+    </div>
+
+
+    </p>
+    <a href="{% url 'tasks_create' %} " class="btn btn-primary">Add task</a>
+  </div>
+  <div class="card-footer text-muted">
+    Created by CHIBUIKE OGODO
+  </div>
+
+
+{%endblock%}

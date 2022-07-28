@@ -1,0 +1,50 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.js' %}">
+    <style>
+        .all {
+            background-color: aqu;
+        }
+        #headi {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+<br/><br/>
+<div class="container" >
+<div class="card text-center">
+  <div class="card-header" id="headi">
+   <p>
+        {%if user.is_authenticated%}
+        <h3> Hello {{request.user}}</h3>
+      <a href="{%url 'logout' %}">Logout</a>
+        {%else%}
+        Guest <a href="{%url 'login' %}">Login</a>
+        {%endif%}
+    </p>
+      <h5 align="left">You have <i>{{count}}</i> incomplete task{{count|pluralize:"s"}} </h5>
+  </div>
+    <div class="all">
+    {%block body%}
+
+
+    {%endblock%}
+    </div>
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+</html>
